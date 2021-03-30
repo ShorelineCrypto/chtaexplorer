@@ -35,7 +35,7 @@
   "dbsettings": {
     "user": "iquidus",
     "password": "fd*asf!fdsf0",
-    "database": "explorerdb",
+    "database": "explorerdb2",
     "address": "localhost",
     "port": 27017
   },
