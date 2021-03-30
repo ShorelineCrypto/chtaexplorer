@@ -70,7 +70,7 @@
     "youtube": false,
     "search": true,
     "movement": true,
-    "network": false
+    "network": true
   },
 
   // index page (valid options for difficulty are POW, POS or Hybrid)
