@@ -24,6 +24,12 @@ https://github.com/iquidus/explorer/tree/1.6.2-legacy
 
 ```
 
+### patch to fix syncing crash/package version
+
+The 1.6.2-legacy version will not work directly, it will crash here and there. To fix the crash, copy file "lib/explorer.js" to replace v1.6.2 default file.
+
+file "package.json" was provided to have correction version at bottom of web page.
+
 #### Other software and working versions
 
 * mongodb v4.2.13 
@@ -65,17 +71,19 @@ and explorer won't refresh to latest blocks.
 
 (2) Common error: "Cannot read property 'length' of undefined" error from scripts/sync.js"
 
-Follow this issue to fix the mongodb/explorer database:
-https://github.com/iquidus/explorer/issues/29
+If the wallet crashed with "core dumped".  restarted wallet with below, possibly in screen session to monitor error msgs:
+```
+./cheetahcoind  -txindex -reindex 
 
 ```
-newmight2015 commented on Jan 19, 2016
-node scripts/sync.js index reindex then node scripts/sync.js index update
 
-@iquidus
- 
-Owner
-iquidus commented on Jan 23, 2016
-also check you have txindex=1 set in your coins .config or are launching the coin daemon with the -txindex flag.
+The patch mainly followed this issue to fix the mongodb/explorer database:
+https://github.com/iquidus/explorer/issues/56
+
+After applied the above patch file,  then reindex/check explorer 
+
 ```
- 
+node scripts/sync.js index reindex
+node scripts/sync.js index check
+```
+The explorer should be able to update block data from here.
