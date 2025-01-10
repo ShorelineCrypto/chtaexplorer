@@ -11,16 +11,12 @@ http://chtaexplorer.mooo.com:3002/
 
 ## Explorer software
 
-#### iquidus explorer - 1.6.2-legacy
+#### iquidus explorer - 1.7.4
 
-The latest commit of iquidus explorer does not work with CHTA.  Earlier version '1.6.2-legacy' branch was used instead at:
-https://github.com/iquidus/explorer/tree/1.6.2-legacy
+The latest commit of iquidus explorer version v1.7.4 works well with Cheetahcoin
 
 ```
   git clone https://github.com/iquidus/explorer.git chtaexplorer
-  cd chtaexplorer
-  git checkout 1.6.2-legacy
-  git pull 
 
 ```
 
@@ -32,7 +28,7 @@ file "package.json" was provided to have correction version at bottom of web pag
 
 #### Other software and working versions
 
-* mongodb v4.2.13 
+* mongodb v4.2.24
 * node.js v12.18.4
 
 Follow guide here for installing mongodb in various version of Ubuntu linux:
