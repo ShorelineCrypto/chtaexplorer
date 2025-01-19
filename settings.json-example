@@ -1226,18 +1226,18 @@
     "sample_data": {
       // blockindex: This value can be any valid block height number from your coins blockchain
       //             NOTE: This value is only used to build example api links on the api page from the /api/getblockhash api for example
-      "blockindex": 64152,
+      "blockindex": 176431,
       // blockhash: This value can be any valid block hash from your coins blockchain
-      //            For many bitcoin clones you can use the following cmd to get the block hash for a given block height: coin-cli getblockhash 64152
+      //            For many bitcoin clones you can use the following cmd to get the block hash for a given block height: coin-cli getblockhash 176431
       //            NOTE: This value is only used to build example api links on the api page from the /api/getblock api for example
-      "blockhash": "ff9811c3e8e047ea35de31a973006e3dff9976671bd539b519af201e5cb049a9",
+      "blockhash": "00000000000005b3205a28ff937e3de9758ed8a39c555360a7e2283ca648f0de",
       // txhash: This value can be any valid transaction hash from your coins blockchain
       //         For many bitcoin clones you can use the following cmd to find a list of tx hashes for a given block hash: coin-cli getblock 000000001ba119a0f6d49ebabd83343b125d7ee3d3184b1b41d6a7f2051153eb
       //         NOTE: This value is only used to build example api links on the api page from the /api/getrawtransaction api for example
-      "txhash": "f4642353a1bab35b8b4e7b9bd294df85e96f4b84bb040e124b431731a19d2634",
+      "txhash": "7528b3d49b5bfb065c780d17ae0854a3999d2843ec0c7e47a82afa1f0db169a2",
       // address: This value can be any valid wallet address from your coins blockchain that has received at least 1 or more coin transactions
       //          NOTE: This value is only used to build example api links on the api page from the /ext/getaddress api for example
-      "address": "NeGjqVoDtX3FF5HYgFrXvaNERc7DwMvSeU"
+      "address": "CfabYoMK2PvZVtnLA946StY6C9nLQ58fYF"
     },
     // public_apis: a collection of settings that pertain to the public api command system
     //              NOTE: Disabling any of these apis will remove the api definition from the api page and will return a "This method is disabled" msg if the api endpoint is called.
