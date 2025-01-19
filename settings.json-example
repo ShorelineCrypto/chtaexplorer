@@ -1629,7 +1629,7 @@
     { "symbol": "ltc", "id": "litecoin" },
     { "symbol": "doge", "id": "dogecoin" },
     { "symbol": "chta", "id": "cheetahcoin" },
-    { "symbol": "chta", "id": "cheetahcoin" }
+    { "symbol": "neng", "id": "nengcoin" }
   ],
 
   //api_cmds: A collection of settings that pertain to the list of customizable rpc api commands
