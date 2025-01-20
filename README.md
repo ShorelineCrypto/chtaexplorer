@@ -2,7 +2,7 @@
 
 This guide explains step by step at high level to self host an explorer for Cheetahcoin (CHTA) in a linux server with docker / docker-compose installed.
 
-The explorer runs with mongodb that also needs about 5.6G of disk for storing the blockchain content in its database plus full node disk requirement of 4.2G. 
+The explorer runs with mongodb that also needs about 4G of disk for storing the blockchain content in its database plus full node disk requirement of 3G. 
 
 ## Example of Working CHTA Explorer
 
