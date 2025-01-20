@@ -1,9 +1,8 @@
 # How to Setup Explorer for Cheetahcoin (CHTA) 
 
-This guide explains step by step at high level to self host an explorer for Cheetahcoin (CHTA) in a linux server such as Ubuntu 18.04.
+This guide explains step by step at high level to self host an explorer for Cheetahcoin (CHTA) in a linux server with docker / docker-compose installed.
 
-Explorer requires a full node of CHTA with "-txindex" flag.  You could use the same full node that you run Cheetah_Cpuminer on.
-The explorer runs with mongodb that also needs about 3G of disk for storing the blockchain content in its database. 
+The explorer runs with mongodb that also needs about 4G of disk for storing the blockchain content in its database plus full node disk requirement of 3G. 
 
 ## Example of Working CHTA Explorer
 
@@ -11,75 +10,79 @@ http://chtaexplorer.mooo.com:3002/
 
 ## Explorer software
 
-#### iquidus explorer - 1.7.4
+The chtaexplorer is powered in its engine by open sourced software eIquidus inside docker container. The eIqidus explorer github can be found at:
+https://github.com/team-exor/eiquidus
 
-The latest commit of iquidus explorer version v1.7.4 works well with Cheetahcoin
+eIquidus github documentation has tons of instructions to configure mongodb and explorer software. The chtaexplorer has automated most of steps with docker method.
+You can follow documentation for understanding docker setup steps or run the same software without docker. 
+
+#### git clone chtaexplorer, prepare host folders
+
+Docker shares several volumes between host and container. The mongodb database folder is cross mounted from user home directory "chtaexplorerdb" while "mongo_backup"
+is mounted as container backup folder for mongo backup operations. Host machine from user home directory ".cheetahcoin" folder is cross mounted inside container for running full node. 
 
 ```
-  git clone https://github.com/iquidus/explorer.git chtaexplorer
-
-```
-
-### patch to fix syncing crash/package version
-
-The 1.6.2-legacy version will not work directly, it will crash here and there. To fix the crash, copy file "lib/explorer.js" to replace v1.6.2 default file.
-
-file "package.json" was provided to have correction version at bottom of web page.
-
-#### Other software and working versions
-
-* mongodb v4.2.24
-* node.js v12.18.4
-
-Follow guide here for installing mongodb in various version of Ubuntu linux:
-
-https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
-
-For nodejs, we recommend using nvm method for installation. 
-
-## Error Handling on Nodejs installation for iquidus explorer
-
-There might be a lot of failures and security warning after issuing "npm install --production" in Ubuntu 18.04. 
-
-Follow the warning guide and do several round of below command for fixing the errors:
-```
-npm audit fix
-npm install
-npm audit fix
-```
-
-After back and forth fix as shown above, your explorer folder should be ready for production. 
-
-## Copy the CHTA settings/logo and port forward to public
-
-Copy the CHTA logo file and setting file as example here. You can modify and change full node/mongodb user/password, port, etc to tailor to your needs. 
-
-You can setup a port forward in your home router for 3002 port to be visable to public. There are also free DNS or Dynamic DNS providers 
-that allow a domain URL to point to your home IPs for this purpose.
-
-## Issues in syncing/operating explorer
-
-(1) Common error:  "Script already running.."
-simply remove the tmp/index.pid file and you will be able to run the script.
-
-When explorer or wallet shut down abnormally, this error will come 
-and explorer won't refresh to latest blocks.
-
-(2) Common error: "Cannot read property 'length' of undefined" error from scripts/sync.js"
-
-If the wallet crashed with "core dumped".  restarted wallet with below, possibly in screen session to monitor error msgs:
-```
-./cheetahcoind  -txindex -reindex 
+  cd ~
+  git clone https://github.com/ShorelineCrypto/chtaexplorer.git
+  mkdir chtaexplorerdb mongo_backup .cheetahcoin
 
 ```
 
-The patch mainly followed this issue to fix the mongodb/explorer database:
-https://github.com/iquidus/explorer/issues/56
+#### build docker image and start container
 
-After applied the above patch file,  then reindex/check explorer 
+You can pull a public docker image with below command:
 
 ```
-node scripts/sync.js index reindex
-node scripts/sync.js index check
+  docker pull shorelinecrypto/chtaexplorer:latest
+  docker tag shorelinecrypto/chtaexplorer:latest chtaexplorer:latest
 ```
-The explorer should be able to update block data from here.
+
+Alternatively at first step, you can build chtaexplorer:latest image with below command:
+
+```
+  cd ~/chtaexplorer
+  docker-compose up -d
+  
+```
+
+The above will run container when the docker image exist locally. 
+
+to build manually:
+
+```
+  docker build -t chtaexplorer .
+```
+
+to stop container:
+```
+docker-compose down
+```
+
+#### config/run mongodb/chtaexplorer
+
+The mongodb is built in the docker image, you can perform below to configure a working explore and mongodb user account.
+
+```
+  docker exec -it chtaexplorer /bin/bash
+```
+
+Above should allow you to login inside a running container, under path "/root/eiquidus" on root user, run below:
+```
+  mongosh
+  use explorerdb2
+  db.createUser( { user: "eiquidus", pwd: "Nd^p2d77ceBX!L", roles: [ "readWrite" ] } )
+  exit
+```
+
+The above completed mongodb database user account setup. Run below to start explorer web:
+
+```
+   cp cheetahcoin.conf ~/.cheetahcoin/
+   ~/cheetahcoin_2.4.0_x86_64_linux-gnu/cheetahcoind
+   nohup bash loop_sync.sh &
+   npm start
+```
+
+Now your chtaexplorer should be running at your "http://YourHostnameorIP:3002" web URL.
+The initial sync will take about overnight time for full Cheetahcoin blockchain update from beginning. 
+

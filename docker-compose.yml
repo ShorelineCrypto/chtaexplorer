@@ -1,0 +1,13 @@
+version: '3.5'
+services:
+  web:
+    build: .
+    container_name: chtaexplorer
+    hostname: chtaexplorer
+    image: chtaexplorer
+    ports:
+      - "3002:3002"
+    volumes:
+      - "${HOME}/.cheetahcoin:/root/.cheetahcoin"
+      - "${HOME}/chtaexplorerdb:/data/db"
+      - "${HOME}/mongo_backup:/mongo_backup"
