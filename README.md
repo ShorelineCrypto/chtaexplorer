@@ -73,7 +73,7 @@ The above completed mongodb database user account setup. Run below to start expl
 
 ```
    cp cheetahcoin.conf ~/.cheetahcoin/
-   ~/cheetahcoin_2.4.0_x86_64_linux-gnu/cheetahcoind
+   ~/cheetahcoin_2.5.0_x86_64_linux-gnu/cheetahcoind
 
    npm run start-pm2
 ```

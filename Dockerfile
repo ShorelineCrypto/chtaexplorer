@@ -6,9 +6,9 @@ RUN apt-get update && \
 ENV HOME=/root
 WORKDIR /root
 
-RUN wget https://github.com/ShorelineCrypto/cheetahcoin/releases/download/v2.4.0/cheetahcoin_2.4.0_x86_64_linux-gnu.tgz
-RUN tar xvfz cheetahcoin_2.4.0_x86_64_linux-gnu.tgz
-RUN rm cheetahcoin_2.4.0_x86_64_linux-gnu.tgz
+RUN wget https://github.com/ShorelineCrypto/cheetahcoin/releases/download/v2.5.0/cheetahcoin_2.5.0_x86_64_linux-gnu.tgz
+RUN tar xvfz cheetahcoin_2.5.0_x86_64_linux-gnu.tgz
+RUN rm cheetahcoin_2.5.0_x86_64_linux-gnu.tgz
 
 # Installing Node
 SHELL ["/bin/bash", "--login", "-i", "-c"]
