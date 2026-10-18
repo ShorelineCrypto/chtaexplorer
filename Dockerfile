@@ -19,7 +19,7 @@ SHELL ["/bin/bash", "--login", "-c"]
 RUN git clone  https://github.com/team-exor/eiquidus.git
 
 WORKDIR /root/eiquidus
-RUN git checkout 42f4e17a5b335feb4faecec00cc336785f73ae52
+RUN git checkout c87cb904a88c4ea64cbe7d25e56ad2b608ebdd65
 RUN source /root/.bashrc && export PATH="$PATH:/root/.nvm/versions/node/v20.9.0/bin" && npm install --only=prod
 RUN source /root/.bashrc && export PATH="$PATH:/root/.nvm/versions/node/v20.9.0/bin" && npm install pm2 -g
 RUN git clone https://github.com/ShorelineCrypto/chtaexplorer.git  chtaexplorer
